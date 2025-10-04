@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidades - Laboratório Mais Você</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0056a6;
+            --secondary: #00a0e3;
+            --accent: #ff6b00;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-contact span {
+            margin-right: 20px;
+        }
+        
+        .header-contact i {
+            margin-right: 5px;
+        }
+        
+        .social-icons a {
+            color: white;
+            margin-left: 15px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--accent);
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            height: 90px;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-img img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .btn:hover {
+            background-color: #e05a00;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 86, 166, 0.9), rgba(0, 160, 227, 0.9)), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Unidades Section */
+        .unidades {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .unidade-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .unidade-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .unidade-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        
+        .unidade-info {
+            padding: 40px;
+        }
+        
+        .unidade-info h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .unidade-details {
+            margin-bottom: 25px;
+        }
+        
+        .detail-item {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+        
+        .detail-icon {
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .detail-text h4 {
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        
+        .detail-text p {
+            color: var(--gray);
+        }
+        
+        .unidade-map {
+            height: 100%;
+            min-height: 350px;
+        }
+        
+        .unidade-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Features */
+        .features {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-item h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Contact CTA */
+        .contact-cta {
+            padding: 80px 0;
+            text-align: center;
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .contact-cta h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .contact-cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* WhatsApp Link */
+        .whatsapp-link {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .whatsapp-link:hover {
+            color: #25D366;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .header-top-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-contact {
+                margin-bottom: 10px;
+            }
+            
+            .header-contact span {
+                display: block;
+                margin: 5px 0;
+            }
+            
+            .social-icons {
+                margin-top: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav {
+                width: 100%;
+                margin: 15px 0;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .unidade-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .unidade-map {
+                min-height: 300px;
+            }
+            
+            .logo-img {
+                height: 70px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .page-header {
+                padding: 60px 0;
+            }
+            
+            .unidades, .features, .contact-cta {
+                padding: 50px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                display: block;
+                text-align: center;
+                margin-top: 10px;
+            }
+            
+            .logo-img {
+                height: 60px;
+            }
+            
+            .unidade-info {
+                padding: 25px;
+            }
+        }
+        
+        /* Menu Hamburguer */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+            }
+            
+            nav ul {
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                width: 100%;
+                background: #fff;
+                border-radius: 8px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+                margin-top: 10px;
+                padding: 0 10px;
+                transition: max-height 0.3s ease, opacity 0.25s ease;
+            }
+            
+            nav ul.open {
+                max-height: 400px;
+                opacity: 1;
+                padding: 10px;
+            }
+            
+            .header-content {
+                align-items: flex-start;
+            }
+            
+            .header-content .btn {
+                margin-top: 10px;
+            }
+        }
+        
+        /* Footer copyright */
+        footer .copyright {
+            border-top: 1px solid rgba(255,255,255,0.12);
+            margin-top: 30px;
+            padding: 14px 0 10px;
+            text-align: center;
+        }
+        
+        footer .copyright p {
+            margin: 0;
+            color: #cfd3d6;
+            font-size: 1rem;
+        }
+        
+        footer .copyright p.dev {
+            margin-top: 6px;
+            color: #aeb4b8;
+            font-size: 0.95rem;
+        }
+    
+/* Espaçamento entre descrição da unidade e o endereço */
+.unidade p {
+  margin-bottom: 15px;
+}
+.unidade .info {
+  margin-top: 10px;
+}
+
+
+/* Espaçamento correto entre descrição e bloco de detalhes (Endereço, etc.) */
+.unidade-info p { margin-bottom: 20px; }
+.unidade-details { margin-top: 12px; }
+
+</style>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container header-top-content">
+                <div class="header-contact">
+                    <span><i class="fas fa-phone"></i> <a href="tel:+553138278680" class="whatsapp-link">(31) 3827-8680</a></span>
+                    <span>
+                        <a href="https://wa.me/5531989788912" class="whatsapp-link" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-whatsapp"></i> (31) 98978-8912
+                        </a>
+                    </span>
+                    <span><i class="fas fa-clock"></i> Segunda a Sexta: 07h às 17h</span>
+                </div>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/laboratoriomaisvoce" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/laboratoriomaisvoce" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container header-content">
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <div class="logo-img">
+                        <img src="img/logo.png" loading="lazy" alt="Laboratório Mais Você" style="height: 100%;">
+                    </div>
+                </a>
+                <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav id="main-menu" role="navigation">
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="exames.html">Exames</a></li>
+                        <li><a href="convenios.html">Convênios</a></li>
+                        <li><a href="unidades.html" style="color: var(--primary);">Unidades</a></li>
+                        <li><a href="resultados.html">Resultados</a></li>
+                        <li><a href="contatos.html">Contato</a></li>
+                    </ul>
+                </nav>
+                <a href="https://wa.me/5531989788912" class="btn" target="_blank" rel="noopener noreferrer">Agendar Exame</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Nossas Unidades</h1>
+            <p>Conheça nossa unidade e venha nos visitar para cuidar da sua saúde com excelência</p>
+        </div>
+    </section>
+
+    <!-- Unidades Section -->
+    <section class="unidades">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossa Unidade</h2>
+                <p>Atualmente atendemos em uma unidade estratégica para melhor atender você</p>
+            </div>
+            
+            <div class="unidade-card">
+                <div class="unidade-content">
+                    <div class="unidade-info">
+                        <h3>Unidade Centro - Ipatinga</h3>
+                        <p>Nossa principal unidade, localizada no coração de Ipatinga, oferece conforto, comodidade e toda a estrutura necessária para realizar seus exames com qualidade e agilidade.</p>
+                        
+                        <div class="unidade-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="detail-text">
+                                    <h4>Endereço</h4>
+                                    <p>Rua Mariana, 120, Centro<br>Ipatinga - MG<br>CEP: 35160-218</p>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="detail-text">
+                                    <h4>Telefone</h4>
+                                    <p>(31) 3827-8680</p>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fab fa-whatsapp"></i>
+                                </div>
+                                <div class="detail-text">
+                                    <h4>WhatsApp</h4>
+                                    <p><a href="https://wa.me/5531989788912" class="whatsapp-link" target="_blank" rel="noopener noreferrer">(31) 98978-8912</a></p>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="detail-text">
+                                    <h4>Horário de Funcionamento</h4>
+                                    <p>Segunda a Sexta: 07h às 17h<br>Sábado e Domingo: Fechado</p>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-parking"></i>
+                                </div>
+                                <div class="detail-text">
+                                    <h4>Estacionamento</h4>
+                                    <p>Facilidade de estacionamento nas redondezas</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="https://wa.me/5531989788912" class="btn" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-whatsapp"></i> Agendar Exame
+                        </a>
+                    </div>
+                    
+                    <div class="unidade-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3752.549167038948!2d-42.53938892433639!3d-19.85583753725725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xaebe5dbc6e0c6f%3A0x5e9e1c6d6a5f5e5e!2sRua%20Mariana%2C%20120%20-%20Centro%2C%20Ipatinga%20-%20MG%2C%2035160-218!5e0!3m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Por que Escolher Nossa Unidade?</h2>
+                <p>Conheça as vantagens de realizar seus exames conosco</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Localização Privilegiada</h3>
+                    <p>Localizada no centro de Ipatinga, de fácil acesso e com estacionamento nas redondezas.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Horário Ampliado</h3>
+                    <p>Atendemos das 07h às 17h para melhor atender sua rotina e necessidades.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Profissionais Qualificados</h3>
+                    <p>Equipe especializada e treinada para oferecer o melhor atendimento.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <h3>Tecnologia de Ponta</h3>
+                    <p>Equipamentos modernos para garantir a precisão e confiabilidade dos resultados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="contact-cta">
+        <div class="container">
+            <h2>Precisa de Mais Informações?</h2>
+            <p>Entre em contato conosco para esclarecer dúvidas, agendar exames ou obter mais informações sobre nossa unidade</p>
+            <a href="https://wa.me/5531989788912" class="btn" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-whatsapp"></i> Falar no WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Laboratório Mais Você</h3>
+                    <p>Cuidamos da sua saúde com excelência, proporcionando qualidade de vida e bem-estar.</p>
+                    <div class="social-icons" style="margin-top: 15px;">
+                        <a href="https://www.facebook.com/laboratoriomaisvoce" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/laboratoriomaisvoce" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="exames.html">Exames</a></li>
+                        <li><a href="convenios.html">Convênios</a></li>
+                        <li><a href="unidades.html">Unidades</a></li>
+                        <li><a href="resultados.html">Resultados</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Rua Mariana, 120, Centro - Ipatinga/MG</li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+553138278680" class="whatsapp-link">(31) 3827-8680</a></li>
+                        <li>
+                            <i class="fab fa-whatsapp"></i> 
+                            <a href="https://wa.me/5531989788912" class="whatsapp-link" target="_blank" rel="noopener noreferrer">(31) 98978-8912</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Horário de Funcionamento</h3>
+                    <ul>
+                        <li>Segunda a Sexta: 07h às 17h</li>
+                        <li>Sábado: Fechado</li>
+                        <li>Domingo: Fechado</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2013 - <script>document.write(new Date().getFullYear())</script> Laboratório Mais Você. Todos os direitos reservados.</p>
+                <p class="dev">Desenvolvido por axfelipe</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Hamburguer
+        (function(){
+            const toggle = document.querySelector('.menu-toggle');
+            const menu = document.querySelector('nav ul');
+            if (!toggle || !menu) return;
+            
+            toggle.addEventListener('click', () => {
+                const isOpen = menu.classList.toggle('open');
+                toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+            
+            menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+                if (menu.classList.contains('open')) {
+                    menu.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            }));
+        })();
+    </script>
+</body>
+</html>

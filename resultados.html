@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados - Laboratório Mais Você</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0056a6;
+            --secondary: #00a0e3;
+            --accent: #ff6b00;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-contact span {
+            margin-right: 20px;
+        }
+        
+        .header-contact i {
+            margin-right: 5px;
+        }
+        
+        .social-icons a {
+            color: white;
+            margin-left: 15px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--accent);
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            height: 90px;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-img img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .btn:hover {
+            background-color: #e05a00;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 86, 166, 0.9), rgba(0, 160, 227, 0.9)), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Resultados Section */
+        .resultados {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .resultados-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .resultados-info {
+            padding: 30px;
+        }
+        
+        .resultados-info h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .resultados-info p {
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+        
+        .features-list {
+            margin: 30px 0;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .feature-icon {
+            background-color: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        /* Login Container */
+        .login-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .login-header {
+            margin-bottom: 30px;
+        }
+        
+        .login-header h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .login-form {
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .login-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .login-btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        .login-footer {
+            margin-top: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .partner-notice { /* refined spacing */
+            background-color: #fff8e1;
+            border: 1px solid #ffd54f;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .partner-notice i {
+            color: #ff9800;
+            margin-right: 8px;
+        }
+        
+        /* Instructions */
+        .instructions {
+            padding: 60px 0;
+            background-color: var(--light);
+        }
+        
+        .instructions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .instruction-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+        
+        .instruction-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .instruction-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .instruction-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Contact CTA */
+        .contact-cta {
+            padding: 80px 0;
+            text-align: center;
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .contact-cta h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .contact-cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* WhatsApp Link */
+        .whatsapp-link {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .whatsapp-link:hover {
+            color: #25D366;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .header-top-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-contact {
+                margin-bottom: 10px;
+            }
+            
+            .header-contact span {
+                display: block;
+                margin: 5px 0;
+            }
+            
+            .social-icons {
+                margin-top: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav {
+                width: 100%;
+                margin: 15px 0;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .resultados-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo-img {
+                height: 70px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .page-header {
+                padding: 60px 0;
+            }
+            
+            .resultados, .instructions, .contact-cta {
+                padding: 50px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                display: block;
+                text-align: center;
+                margin-top: 10px;
+            }
+            
+            .logo-img {
+                height: 60px;
+            }
+            
+            .login-container {
+                padding: 25px;
+            }
+        }
+        
+        /* Menu Hamburguer */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+            }
+            
+            nav ul {
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                width: 100%;
+                background: #fff;
+                border-radius: 8px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+                margin-top: 10px;
+                padding: 0 10px;
+                transition: max-height 0.3s ease, opacity 0.25s ease;
+            }
+            
+            nav ul.open {
+                max-height: 400px;
+                opacity: 1;
+                padding: 10px;
+            }
+            
+            .header-content {
+                align-items: flex-start;
+            }
+            
+            .header-content .btn {
+                margin-top: 10px;
+            }
+        }
+        
+        /* Footer copyright */
+        footer .copyright {
+            border-top: 1px solid rgba(255,255,255,0.12);
+            margin-top: 30px;
+            padding: 14px 0 10px;
+            text-align: center;
+        }
+        
+        footer .copyright p {
+            margin: 0;
+            color: #cfd3d6;
+            font-size: 1rem;
+        }
+        
+        footer .copyright p.dev {
+            margin-top: 6px;
+            color: #aeb4b8;
+            font-size: 0.95rem;
+        }
+    
+        /* btn full-width on small screens */
+        @media (max-width: 576px){ .btn{ width:100%; } }
+    </style>
+    <meta name="description" content="Resultados de exames online do Laboratório Mais Você. Acesse com seu usuário e senha do protocolo.">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container header-top-content">
+                <div class="header-contact">
+                    <span><i class="fas fa-phone"></i> <a href="tel:+553138278680" class="whatsapp-link">(31) 3827-8680</a></span>
+                    <span>
+                        <a href="https://wa.me/5531989788912" class="whatsapp-link" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-whatsapp"></i> (31) 98978-8912
+                        </a>
+                    </span>
+                    <span><i class="fas fa-clock"></i> Segunda a Sexta: 07h às 17h</span>
+                </div>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/laboratoriomaisvoce" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/laboratoriomaisvoce" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container header-content">
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <div class="logo-img">
+                        <img src="img/logo.png" loading="lazy" alt="Laboratório Mais Você" style="height: 100%;">
+                    </div>
+                </a>
+                <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav id="main-menu" role="navigation" aria-label="Navegação principal">
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="exames.html">Exames</a></li>
+                        <li><a href="convenios.html">Convênios</a></li>
+                        <li><a href="unidades.html">Unidades</a></li>
+                        <li><a href="resultados.html" style="color: var(--primary);">Resultados</a></li>
+                        <li><a href="contatos.html">Contato</a></li>
+                    </ul>
+                </nav>
+                <a href="https://wa.me/5531989788912" class="btn" target="_blank" rel="noopener noreferrer">Agendar Exame</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Resultados de Exames</h1>
+            <p>Acesse seus resultados de forma rápida, segura e conveniente</p>
+        </div>
+    </section>
+
+    <!-- Resultados Section -->
+    <section class="resultados">
+        <div class="container">
+            <div class="section-title">
+                <h2>Acesse Seus Resultados</h2>
+                <p>Consulte online os resultados dos seus exames de forma prática</p>
+            </div>
+            
+            <div class="resultados-content">
+                <div class="resultados-info">
+                    <h3>Resultados Online</h3>
+                    <p>Disponibilizamos seus resultados de exames através do nosso sistema seguro e integrado. Acesse a qualquer momento e de qualquer lugar.</p>
+                    
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Acesso Seguro</h4>
+                                <p>Seus dados são protegidos com criptografia avançada</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div>
+                                <h4>Resultados Rápidos</h4>
+                                <p>Disponíveis assim que liberados pelo laboratório</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Acesso Multiplataforma</h4>
+                                <p>Consulte no computador, tablet ou smartphone</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <div>
+                                <h4>Download Disponível</h4>
+                                <p>Baixe e imprima seus resultados quando precisar</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p><strong>Dúvidas sobre seus resultados?</strong> Entre em contato conosco para esclarecimentos.</p>
+                </div>
+                
+                <div class="login-container">
+                    <div class="login-header">
+                        <h3>Acesso ao Sistema</h3>
+                        <p>Utilize o usuário e senha do seu protocolo de exame</p>
+                    </div>
+                    
+                    <form id="loginForm" class="login-form">
+                        <div class="form-group">
+                            <label for="username">Usuário</label>
+                            <input type="text" id="username" class="form-control" placeholder="Digite o usuário do protocolo" required autocomplete="username">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Senha</label>
+                            <input type="password" id="password" class="form-control" placeholder="Digite a senha do protocolo" required autocomplete="current-password">
+                        </div>
+                        
+                        <button type="submit" class="login-btn">Acessar Resultados</button>
+                    </form>
+                    
+                    <div class="partner-notice">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Você será direcionado ao nosso laboratório parceiro</strong>
+                        <p style="margin-top: 8px; font-size: 0.85rem; margin-bottom: 0;">
+                            As análises dos exames são realizadas por nosso laboratório parceiro especializado
+                        </p>
+                    </div>
+                    
+                    <div class="login-footer">
+                        <p>Não tem seu protocolo? <a href="https://wa.me/5531989788912" class="whatsapp-link">Entre em contato</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructions Section -->
+    <section class="instructions">
+        <div class="container">
+            <div class="section-title">
+                <h2>Como Acessar Seus Resultados</h2>
+                <p>Siga estes passos simples para consultar seus exames</p>
+            </div>
+            
+            <div class="instructions-grid">
+                <div class="instruction-card">
+                    <div class="instruction-icon">
+                        <i class="fas fa-file-medical"></i>
+                    </div>
+                    <h3>Protocolo de Exame</h3>
+                    <p>Localize o usuário e senha no protocolo que você recebeu após a coleta dos exames</p>
+                </div>
+                
+                <div class="instruction-card">
+                    <div class="instruction-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h3>Credenciais</h3>
+                    <p>Utilize o usuário e senha do protocolo. Não é necessário cadastro prévio</p>
+                </div>
+                
+                <div class="instruction-card">
+                    <div class="instruction-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Consulta</h3>
+                    <p>Após login, visualize todos os exames disponíveis para consulta</p>
+                </div>
+                
+                <div class="instruction-card">
+                    <div class="instruction-icon">
+                        <i class="fas fa-file-download"></i>
+                    </div>
+                    <h3>Download</h3>
+                    <p>Baixe e imprima seus resultados quando necessário</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="contact-cta">
+        <div class="container">
+            <h2>Precisa de Ajuda?</h2>
+            <p>Estamos à disposição para esclarecer dúvidas sobre resultados ou qualquer outro assunto</p>
+            <a href="https://wa.me/5531989788912" class="btn" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-whatsapp"></i> Falar no WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Laboratório Mais Você</h3>
+                    <p>Cuidamos da sua saúde com excelência, proporcionando qualidade de vida e bem-estar.</p>
+                    <div class="social-icons" style="margin-top: 15px;">
+                        <a href="https://www.facebook.com/laboratoriomaisvoce" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/laboratoriomaisvoce" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="exames.html">Exames</a></li>
+                        <li><a href="convenios.html">Convênios</a></li>
+                        <li><a href="unidades.html">Unidades</a></li>
+                        <li><a href="resultados.html">Resultados</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Rua Mariana, 120, Centro - Ipatinga/MG</li>
+                        <li><i class="fas fa-phone"></i> (31) 3827-8680</li>
+                        <li>
+                            <i class="fab fa-whatsapp"></i> 
+                            <a href="https://wa.me/5531989788912" class="whatsapp-link" target="_blank" rel="noopener noreferrer">(31) 98978-8912</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Horário de Funcionamento</h3>
+                    <ul>
+                        <li>Segunda a Sexta: 07h às 17h</li>
+                        <li>Sábado: Fechado</li>
+                        <li>Domingo: Fechado</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2013 - <script>document.write(new Date().getFullYear())</script> Laboratório Mais Você. Todos os direitos reservados.</p>
+                <p class="dev">Desenvolvido por axfelipe</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Hamburguer
+        (function(){
+            const toggle = document.querySelector('.menu-toggle');
+            const menu = document.querySelector('nav ul');
+            if (!toggle || !menu) return;
+            
+            toggle.addEventListener('click', () => {
+                const isOpen = menu.classList.toggle('open');
+                toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+            
+            menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+                if (menu.classList.contains('open')) {
+                    menu.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            }));
+        })();
+
+        // Login Form Redirection
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Redireciona diretamente para o sistema de resultados
+            window.open('https://biocellnet.uniexames.com.br/logins/login', '_blank');
+        });
+    </script>
+</body>
+</html>
