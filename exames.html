@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exames - Laboratório Mais Você</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0056a6;
+            --secondary: #00a0e3;
+            --accent: #ff6b00;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-contact span {
+            margin-right: 20px;
+        }
+        
+        .header-contact i {
+            margin-right: 5px;
+        }
+        
+        .social-icons a {
+            color: white;
+            margin-left: 15px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--accent);
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            height: 90px;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-img img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .btn:hover {
+            background-color: #e05a00;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 86, 166, 0.9), rgba(0, 160, 227, 0.9)), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Exames Section */
+        .exames {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .exames-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .exame-tab {
+            background-color: var(--light);
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            border-radius: 5px;
+        }
+        
+        .exame-tab.active {
+            background-color: white;
+            border-bottom: 3px solid var(--accent);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .exame-content {
+            display: none;
+        }
+        
+        .exame-content.active {
+            display: block;
+        }
+        
+        .exames-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .exame-category {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .exame-category h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+            font-size: 1.3rem;
+        }
+        
+        .exame-list {
+            list-style: none;
+        }
+        
+        .exame-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--light);
+            display: flex;
+            align-items: center;
+        }
+        
+        .exame-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .exame-list li i {
+            color: var(--primary);
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        
+        /* Extras Section */
+        .extras {
+            padding: 60px 0;
+            background-color: var(--light);
+        }
+        
+        .extras-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .extra-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+        
+        .extra-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .extra-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .extra-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Preparo Section */
+        .preparo {
+            padding: 60px 0;
+        }
+        
+        .preparo-content {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .preparo-content h2 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .preparo-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .preparo-item {
+            text-align: center;
+        }
+        
+        .preparo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Contact CTA */
+        .contact-cta {
+            padding: 70px 0;
+            text-align: center;
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .contact-cta h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .contact-cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .developer {
+            margin-top: 5px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        /* WhatsApp Link */
+        .whatsapp-link {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .whatsapp-link:hover {
+            color: #25D366;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .header-top-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-contact {
+                margin-bottom: 10px;
+            }
+            
+            .header-contact span {
+                display: block;
+                margin: 5px 0;
+            }
+            
+            .social-icons {
+                margin-top: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav {
+                width: 100%;
+                margin: 15px 0;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .exames-tabs {
+                flex-direction: column;
+            }
+            
+            .exame-tab {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            .exames-grid, .extras-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo-img {
+                height: 70px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .page-header {
+                padding: 60px 0;
+            }
+            
+            .exames, .extras, .preparo, .contact-cta {
+                padding: 50px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                display: block;
+                text-align: center;
+                margin-top: 10px;
+            }
+            
+            .logo-img {
+                height: 60px;
+            }
+            
+            .exame-category, .extra-card, .preparo-content {
+                padding: 20px;
+            }
+        }
+    
+/* ===== Menu Hamburguer Responsivo ===== */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+.menu-toggle:focus { outline: 3px solid var(--accent); outline-offset: 2px; }
+nav { position: relative; }
+nav ul { transition: max-height 0.3s ease, opacity 0.25s ease; }
+@media (max-width: 768px) {
+    .menu-toggle { display: inline-flex; align-items: center; gap: 8px; }
+    nav ul {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        width: 100%;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        margin-top: 10px;
+        padding: 0 10px;
+    }
+    nav ul.open {
+        max-height: 400px;
+        opacity: 1;
+        padding: 10px;
+    }
+    .header-content { align-items: flex-start; }
+    .header-content .btn { margin-top: 10px; }
+}
+
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container header-top-content">
+                <div class="header-contact">
+                    <span><i class="fas fa-phone"></i> (31) 3827-8680</span>
+                    <span>
+                        <a href="https://wa.me/5531989788912" class="whatsapp-link" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-whatsapp"></i> (31) 98978-8912
+                        </a>
+                    </span>
+                    <span><i class="fas fa-clock"></i> Segunda a Sexta: 07h às 17h</span>
+                </div>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/laboratoriomaisvoce" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/laboratoriomaisvoce" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container header-content">
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <div class="logo-img">
+                        <img src="img/logo.png" loading="lazy" alt="Laboratório Mais Você" style="height: 100%;">
+                    </div>
+                </a>
+                <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav id="main-menu" role="navigation">
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="exames.html" style="color: var(--primary);">Exames</a></li>
+                        <li><a href="convenios.html">Convênios</a></li>
+                        <li><a href="unidades.html">Unidades</a></li>
+                        <li><a href="resultados.html">Resultados</a></li>
+                        <li><a href="contatos.html">Contato</a></li>
+                    </ul>
+                </nav>
+                <a href="https://wa.me/5531989788912" class="btn" target="_blank" rel="noopener noreferrer">Agendar Exame</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Exames Laboratoriais</h1>
+            <p>Realizamos uma ampla gama de exames com tecnologia de ponta e resultados precisos para cuidar da sua saúde</p>
+        </div>
+    </section>
+
+    <!-- Exames Section -->
+    <section class="exames">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Exames</h2>
+                <p>Confira nossa lista completa de exames de análise clínica</p>
+            </div>
+            
+            <div class="exames-tabs">
+                <button class="exame-tab active" data-tab="hematologia">Hematologia</button>
+                <button class="exame-tab" data-tab="bioquimica">Bioquímica</button>
+                <button class="exame-tab" data-tab="hormonios">Hormônios</button>
+                <button class="exame-tab" data-tab="urina">Urinálise</button>
+                <button class="exame-tab" data-tab="imunologia">Imunologia</button>
+            </div>
+            
+            <!-- Hematologia -->
+            <div class="exame-content active" id="hematologia">
+                <div class="exames-grid">
+                    <div class="exame-category">
+                        <h3>Hematologia Completa</h3>
+                        <ul class="exame-list">
+                            <li><i class="fas fa-check"></i> Hemograma Completo</li>
+                            <li><i class="fas fa-check"></i> Contagem de Plaquetas</li>
+                            <li><i class="fas fa-check"></i> Reticulócitos</li>
+                            <li><i class="fas fa-check"></i> Velocidade de Hemossedimentação (VHS)</li>
+                            <li><i class="fas fa-check"></i> Tempo de Protrombina</li>
+                            <li><i class="fas fa-check"></i> Tempo de Tromboplastina</li>
+                            <li><i class="fas fa-check"></i> Fibrinogênio</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="exame-category">
+                        <h3>Coagulograma</h3>
+                        <ul class="exame-list">
+                            <li><i class="fas fa-check"></i> TAP (Tempo de Atividade de Protrombina)</li>
+                            <li><i class="fas fa-check"></i> TTPA (Tempo de Tromboplastina Parcial Ativada)</li>
+                            <li><i class="fas fa-check"></i> INR (Razão Normalizada Internacional)</li>
+                            <li><i class="fas fa-check"></i> Dosagem de Fibrinogênio</li>
+                            <li><i class="fas fa-check"></i> Tempo de Sangramento</li>
+                            <li><i class="fas fa-check"></i> Tempo de Coagulação</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bioquímica -->
+            <div class="exame-content" id="bioquimica">
+                <div class="exames-grid">
+                    <div class="exame-category">
+                        <h3>Bioquímica Básica</h3>
+                        <ul class="exame-list">
+                            <li><i class="fas fa-check"></i> Glicemia</li>
+                            <li><i class="fas fa-check"></i> Colesterol Total e Frações</li>
+                            <li><i class="fas fa-check"></i> Triglicerídeos</li>
+                            <li><i class="fas fa-check"></i> Ureia</li>
+                            <li><i class="fas fa-check"></i> Creatinina</li>
+                            <li><i class="fas fa-check"></i> Ácido Úrico</li>
+                            <li><i class="fas fa-check"></i> TGO/AST</li>
+                            <li><i class="fas fa-check"></i> TGP/ALT</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="exame-category">
+                        <h3>Bioquímica Especializada</h3>
+                        <ul class="exame-list">
+                            <li><i class="fas fa-check"></i> Bilirrubinas (Total, Direta e Indireta)</li>
+                            <li><i class="fas fa-check"></i> Fosfatase Alcalina</li>
+                            <li><i class="fas fa-check"></i> Gama GT</li>
+                            <li><i class="fas fa-check"></i> LDH</li>
+                            <li><i class="fas fa-check"></i> Amilase</li>
+                            <li><i class="fas fa-check"></i> Lipase</li>
+                            <li><i class="fas fa-check"></i> Cálcio</li>
+                            <li><i class="fas fa-check"></i> Fósforo</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="exame-category">
+                        <h3>Função Renal</h3>
+                        <ul class="exame-list">
+                            <li><i class="fas fa-check"></i> Clearance de Creatinina</li>
+                            <li><i class="fas fa-check"></i> Eletrólitos (Sódio, Potássio, Cloro)</li>
+                            <li><i class="fas fa-check"></i> Proteinúria de 24h</li>
+                            <li><i class="fas fa-check"></i> Microalbuminúria</li>
+                            <li><i class="fas fa-check"></i> Uréia</li>
+                            <li><i class="fas fa-check"></i> Creatinina</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hormônios -->
+            <div class="exame-content" id="hormonios">
+                <div class="exames-grid">
+                    <div class="exame-category">
+                        <h3>Hormônios Tireoidianos</h3>
+                        <ul class="exame-list">
+                            <li><i class="fas fa-check"></i> TSH</li>
+                            <li><i class="fas fa-check"></i> T4 Livre</li>
+                            <li><i class="fas fa-check"></i> T4 Total</li>
+                            <li><i class="fas fa-check"></i> T3 Livre</li>
+                            <li><i class="fas fa-check"></i> T3 Total</li>
+                            <li><i class="fas fa-check"></i> Tireoglobulina</li>
+                            <li><i class="fas fa-check"></i> Anticorpos Anti-Tireoidianos</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="exame-category">
+                        <h3>Hormônios Sexuais</h3>
+                        <ul class="exame-list">
+                            <li><i class="fas fa-check"></i> Estradiol</li>
+                            <li><i class="fas fa-check"></i> Progesterona</li>
+                            <li><i class="fas fa-check"></i> Testosterona</li>
+                            <li><i class="fas fa-check"></i> FSH</li>
+                            <li><i class="fas fa-check"></i> LH</li>
+                            <li><i class="fas fa-check"></i> Prolactina</li>
+                            <li><i class="fas fa-check"></i> Beta HCG</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="exame-category">
+                        <h3>Outros Hormônios</h3>
+                        <ul class="exame-list">
+                            <li><i class="fas fa-check"></i> Cortisol</li>
+                            <li><i class="fas fa-check"></i> ACTH</li>
+                            <li><i class="fas fa-check"></i> GH (Hormônio do Crescimento)</li>
+                            <li><i class="fas fa-check"></i> IGF-1</li>
+                            <li><i class="fas fa-check"></i> Paratormônio (PTH)</li>
+                            <li><i class="fas fa-check"></i> Vitamina D</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Urinálise -->
+            <div class="exame-content" id="urina">
+                <div class="exames-grid">
+                    <div class="exame-category">
+                        <h3>Exames de Urina</h3>
+                        <ul class="exame-list">
+                            <li><i class="fas fa-check"></i> EAS (Elementos Anormais do Sedimento)</li>
+                            <li><i class="fas fa-check"></i> Urina Tipo I</li>
+                            <li><i class="fas fa-check"></i> Urina de 24 Horas</li>
+                            <li><i class="fas fa-check"></i> Cultura de Urina</li>
+                            <li><i class="fas fa-check"></i> Antibiograma</li>
+                            <li><i class="fas fa-check"></i> Pesquisa de Proteinúria</li>
+                            <li><i class="fas fa-check"></i> Pesquisa de Glicosúria</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="exame-category">
+                        <h3>Outros Exames</h3>
+                        <ul class="exame-list">
+                            <li><i class="fas fa-check"></i> Parasitológico de Fezes</li>
+                            <li><i class="fas fa-check"></i> Coprocultura</li>
+                            <li><i class="fas fa-check"></i> Pesquisa de Sangue Oculto</li>
+                            <li><i class="fas fa-check"></i> Espermograma</li>
+                            <li><i class="fas fa-check"></i> Teste de Gravidez</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Imunologia -->
+            <div class="exame-content" id="imunologia">
+                <div class="exames-grid">
+                    <div class="exame-category">
+                        <h3>Marcadores Tumorais</h3>
+                        <ul class="exame-list">
+                            <li><i class="fas fa-check"></i> PSA</li>
+                            <li><i class="fas fa-check"></i> CEA</li>
+                            <li><i class="fas fa-check"></i> CA 125</li>
+                            <li><i class="fas fa-check"></i> CA 19-9</li>
+                            <li><i class="fas fa-check"></i> CA 15-3</li>
+                            <li><i class="fas fa-check"></i> Alfafetoproteína</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="exame-category">
+                        <h3>Sorologias</h3>
+                        <ul class="exame-list">
+                            <li><i class="fas fa-check"></i> HIV</li>
+                            <li><i class="fas fa-check"></i> Hepatites (A, B, C)</li>
+                            <li><i class="fas fa-check"></i> Sífilis (VDRL)</li>
+                            <li><i class="fas fa-check"></i> Toxoplasmose</li>
+                            <li><i class="fas fa-check"></i> Rubéola</li>
+                            <li><i class="fas fa-check"></i> Citomegalovírus</li>
+                            <li><i class="fas fa-check"></i> Dengue</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="exame-category">
+                        <h3>Autoimunes</h3>
+                        <ul class="exame-list">
+                            <li><i class="fas fa-check"></i> FAN (Fator Antinuclear)</li>
+                            <li><i class="fas fa-check"></i> FR (Fator Reumatoide)</li>
+                            <li><i class="fas fa-check"></i> Anti-CCP</li>
+                            <li><i class="fas fa-check"></i> ANCA</li>
+                            <li><i class="fas fa-check"></i> Anti-DNA</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Extras Section -->
+    <section class="extras">
+        <div class="container">
+            <div class="section-title">
+                <h2>Exames Complementares</h2>
+                <p>Também realizamos exames especiais e de imagem</p>
+            </div>
+            
+            <div class="extras-grid">
+                <div class="extra-card">
+                    <div class="extra-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>MAPA</h3>
+                    <p>Monitoramento Ambulatorial da Pressão Arterial</p>
+                </div>
+                
+                <div class="extra-card">
+                    <div class="extra-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>HOLTER</h3>
+                    <p>Monitoramento Eletrocardiográfico Contínuo</p>
+                </div>
+                
+                <div class="extra-card">
+                    <div class="extra-icon">
+                        <i class="fas fa-wave-square"></i>
+                    </div>
+                    <h3>ECOCARDIOGRAMA</h3>
+                    <p>Ultrassom do Coração</p>
+                </div>
+                
+                <div class="extra-card">
+                    <div class="extra-icon">
+                        <i class="fas fa-heart-pulse"></i>
+                    </div>
+                    <h3>ECG</h3>
+                    <p>Eletrocardiograma</p>
+                </div>
+                
+                <div class="extra-card">
+                    <div class="extra-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>EEG</h3>
+                    <p>Eletroencefalograma</p>
+                </div>
+                
+                <div class="extra-card">
+                    <div class="extra-icon">
+                        <i class="fas fa-allergies"></i>
+                    </div>
+                    <h3>PRICK TEST</h3>
+                    <p>Teste de Alergia Cutânea</p>
+                </div>
+                
+                <div class="extra-card">
+                    <div class="extra-icon">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <h3>PATCH TEST</h3>
+                    <p>Teste de Contato para Alergia</p>
+                </div>
+                
+                <div class="extra-card">
+                    <div class="extra-icon">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <h3>POLISSONOGRAFIA</h3>
+                    <p>Estudo do Sono</p>
+                </div>
+                
+                <div class="extra-card">
+                    <div class="extra-icon">
+                        <i class="fas fa-lungs"></i>
+                    </div>
+                    <h3>ESPIROMETRIA</h3>
+                    <p>Teste de Função Pulmonar</p>
+                </div>
+                
+                <div class="extra-card">
+                    <div class="extra-icon">
+                        <i class="fas fa-procedures"></i>
+                    </div>
+                    <h3>ULTRASSONOGRAFIA</h3>
+                    <p>Exames de Ultrassom em Geral</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preparo Section -->
+    <section class="preparo">
+        <div class="container">
+            <div class="preparo-content">
+                <h2>Preparo para Exames</h2>
+                <div class="preparo-info">
+                    <div class="preparo-item">
+                        <div class="preparo-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3>Jejum</h3>
+                        <p>Alguns exames requerem jejum de 8 a 12 horas</p>
+                    </div>
+                    
+                    <div class="preparo-item">
+                        <div class="preparo-icon">
+                            <i class="fas fa-prescription-bottle"></i>
+                        </div>
+                        <h3>Medicações</h3>
+                        <p>Informe sobre medicamentos em uso</p>
+                    </div>
+                    
+                    <div class="preparo-item">
+                        <div class="preparo-icon">
+                            <i class="fas fa-file-medical"></i>
+                        </div>
+                        <h3>Documentos</h3>
+                        <p>Traga documentos e solicitação médica</p>
+                    </div>
+                    
+                    <div class="preparo-item">
+                        <div class="preparo-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Horário</h3>
+                        <p>Respeite o horário de coleta indicado</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="contact-cta">
+        <div class="container">
+            <h2>Agende Seus Exames</h2>
+            <p>Entre em contato conosco para agendar seus exames ou tirar dúvidas sobre preparo e horários</p>
+            <a href="https://wa.me/5531989788912" class="btn" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-whatsapp"></i> Agendar pelo WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Laboratório Mais Você</h3>
+                    <p>Cuidamos da sua saúde com excelência, proporcionando qualidade de vida e bem-estar.</p>
+                    <div class="social-icons" style="margin-top: 15px;">
+                        <a href="https://www.facebook.com/laboratoriomaisvoce" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/laboratoriomaisvoce" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="exames.html">Exames</a></li>
+                        <li><a href="convenios.html">Convênios</a></li>
+                        <li><a href="#">Unidades</a></li>
+                        <li><a href="#">Resultados</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Rua Mariana, 120, Centro - Ipatinga/MG</li>
+                        <li><i class="fas fa-phone"></i> (31) 3827-8680</li>
+                        <li>
+                            <i class="fab fa-whatsapp"></i> 
+                            <a href="https://wa.me/5531989788912" class="whatsapp-link" target="_blank" rel="noopener noreferrer">(31) 98978-8912</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Horário de Funcionamento</h3>
+                    <ul>
+                        <li>Segunda a Sexta: 07h às 17h</li>
+                        <li>Sábado: Fechado</li>
+                        <li>Domingo: Fechado</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; <span id="current-year">2024</span> Laboratório Mais Você. Todos os direitos reservados.</p>
+                <p class="developer">Desenvolvido por axfelipe</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality for exames - CORRIGIDO E FUNCIONAL
+        document.addEventListener('DOMContentLoaded', function() {
+            const exameTabs = document.querySelectorAll('.exame-tab');
+            
+            exameTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs and contents
+                    document.querySelectorAll('.exame-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.exame-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Atualizar ano automaticamente no copyright
+            const currentYearElement = document.getElementById('current-year');
+            const currentYear = new Date().getFullYear();
+            currentYearElement.textContent = `2013 - ${currentYear}`;
+        });
+    
+// ===== Menu Hamburguer =====
+(function(){
+  const toggle = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('nav ul');
+  if (!toggle || !menu) return;
+  toggle.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    if (menu.classList.contains('open')) {
+      menu.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  }));
+})();
+
+</script>
+</body>
+</html>
